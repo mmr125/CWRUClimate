@@ -1,0 +1,109 @@
+---
+title: "Preliminary Action Map"
+---
+
+This is a representation of the initial mapping effort to explore climate change action on the CWRU campus and uses data publicly available on the various case.edu websites. 
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include = FALSE}
+library(here)
+library(shiny)
+library(tidyverse)
+library(networkD3)
+library(janitor)
+library(googlesheets4)
+
+
+MasterSheet<-read_sheet("https://docs.google.com/spreadsheets/d/1E4znQKCX3GmXPabkZJV2IzeAWDb73vXEUs-nDRwCwsk/edit#gid=0") %>% 
+  separate(col = "Connections", sep = ",", into =paste("connection", 1:15), remove = TRUE)%>%
+  clean_names() %>% 
+  gather(key = "Number", value ="Connections", connection_1:connection_15) %>% 
+  select(-Number) %>% 
+  distinct() 
+```
+
+
+```{r include = FALSE}
+#Sources<-MasterSheet %>%
+  #select(people_organizations, type_2, hyperlink) %>% 
+  #distinct() %>% 
+  #rename(label = people_organizations) %>% 
+ # na.omit()
+
+Sources<-MasterSheet %>%
+  select(people_organizations, type_2) %>% 
+  distinct() %>% 
+  rename(label = people_organizations) %>% 
+  na.omit()
+
+Destinations<-MasterSheet %>% 
+  select(Connections) %>% 
+  distinct() %>% 
+  rename(label = Connections) %>%
+  na.omit()
+
+nodes<-full_join(Sources, Destinations, by = "label")
+
+
+
+nodes<-nodes %>% 
+  rowid_to_column("id")
+
+#per_route <- MasterSheet %>%
+ # select(people_organizations, Connections, hyperlink) %>% 
+  #na.omit() %>% 
+  #group_by(people_organizations, Connections) %>%
+  #summarise(weight = n()) %>% 
+  #ungroup() %>% 
+  #na.omit()
+
+per_route <- MasterSheet %>%
+  group_by(people_organizations, Connections) %>%
+  summarise(weight = n()) %>% 
+  ungroup() %>% 
+  na.omit()
+
+edges<-per_route %>% 
+  left_join(nodes, by = c("people_organizations" = "label")) %>% 
+  rename(from = id)
+
+edges<-edges %>% 
+  left_join(nodes, by = c("Connections" = "label")) %>% 
+  rename(to = id)
+edges<-select(edges, from, to, weight)
+```
+
+
+```{r include = FALSE}
+nodes_d3<-mutate(nodes, id = id-1)
+edges_d3<-mutate(edges, from = from-1, to = to-1)
+
+FN1<-forceNetwork(Links = edges_d3, Nodes = nodes_d3, Source = "from", Target = "to", NodeID = "label", Group = "id", Value = "weight", opacity = 1, fontSize = 16, zoom = TRUE, charge = -5, opacityNoHover = .05)
+FN1
+
+FN2<-forceNetwork(Links = edges_d3, Nodes = nodes_d3, Source = "from", Target = "to", NodeID = "label", Group = "type_2", Value = "weight", opacity = 1, fontSize = 16, zoom = TRUE, charge = -5, opacityNoHover = .05, legend = TRUE)
+FN2
+#FN2$x$nodes$hyperlink<-Sources$hyperlink
+#FN2$x$options$clickAction = 'window.open(d.hyperlink)'
+
+simpleNetwork(per_route, height = "500px", width = "500px", 
+              Source = 1, 
+              Target = 2, 
+              linkDistance = 5, 
+              charge = -100, 
+              fontSize = 20, 
+              fontFamily = "serif", 
+              linkColour = "#666", 
+              nodeColour = "#69b3a2", 
+              opacity = 0.9, 
+              zoom = T)
+
+```
+
+```{r fig.cap = "Preliminary Network Diagram", echo = FALSE}
+FN2
+```
+

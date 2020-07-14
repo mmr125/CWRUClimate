@@ -1,0 +1,9 @@
+name: "CAN"
+
+navbar:
+  
+  title: "Climate Action Network at CWRU"
+  
+  left:
+    - text: "Preliminary Map"
+      href: index.html
