@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Preliminary Action Map</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="site_libs/d3-4.5.0/d3.min.js"></script>
+<script src="site_libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Climate Action Network at CWRU</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Preliminary Map</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Preliminary Action Map</h1>
+
+</div>
+
+
+<p>This is a representation of the initial mapping effort to explore climate change action on the CWRU campus and uses data publicly available on the various case.edu websites.</p>
+<div class="figure">
+<div id="htmlwidget-0ce88826a160cb6436a7" style="width:672px;height:480px;" class="forceNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0ce88826a160cb6436a7">{"x":{"links":{"source":[0,2,4,5,6,9,9,9,11,11,13,13,14,14,14,14,15,15,16,16,16,17,17,17,18,18,18,18,18,18,18,18,19,19,20,20,20,20,21,21,23,24,26,27,27,28,29,30,34,35,40,40,42,42,43,43,43,44,45,46,46,47,49,49,50,53,54,56,58,60,61,61,61,61,61,61,61,61,61,61,61,61,61,65,69,69,69,70,71,72,73,74,75,79,86,88,89,91,92,92,93,94,95,96,100,100,100,101,102,105,106,107,107,107,107,109,109,116,120,122,122,123,128,129,130,131,132,134,134,136,136,136,137,137,138,140,141,142,142,142,142,142,142,142,145,146,146,147,147,149,149,151,151,152,152],"target":[106,18,18,142,107,11,15,46,9,61,14,18,13,45,86,138,9,61,19,61,88,49,58,85,2,4,13,21,23,72,116,123,16,88,24,94,120,131,18,28,18,20,42,61,91,21,107,107,107,152,142,146,26,128,65,89,95,92,14,9,61,61,17,107,133,107,142,12,17,61,15,16,27,46,47,71,96,100,128,134,142,147,152,43,96,107,134,130,61,18,142,75,74,149,14,19,43,27,44,133,142,20,43,61,61,107,136,145,149,145,0,6,109,136,141,107,136,18,20,134,142,18,61,151,70,20,107,61,122,100,107,109,107,140,14,107,107,5,40,54,61,73,93,122,107,40,61,61,151,79,102,129,147,35,61],"value":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["Aaron Jennings","Advocates for Cleveland Health","Amy Hise","Anurag Gupta","Arlene Dent","Arthur Heuer","Association for the Advancement of Sustainability in Higher Education (AASHE)","Banu Sizirici Yildiz","Beverly Saylor","Bob Savinell","Bonnie Richley","Breakthrough Electrolytes for Energy Storage Energy Frontier Research Center (BEES EFRC)","Brian Gray","Brian Grimberg","Case Comprehensive Cancer Center","Case Electrochemical Capacitor Fabrication Facility (CECFF)","Center for Dielectrics and Energy Storage (CDES)","Center for Engineering Action","Center for Global Health and Diseases","Center for Layered Polymeric Systems (CLiPS)","Center on Urban Poverty and Community Development","Charles King","Chris Laszlo","Christopher King","Claudia Coulton","Cleveland Carbon Fund","Cleveland Institute of Art","Control and Energy Systems Center (CESC)","Cuyahoga County Board of Health","Cuyahoga County Solid Waste District","Cuyahoga Soil and Water Conservation District","CWRU Cooking Club","CWRU Public Health Association","CWRU Science and Human Rights Coalition","CWRU's Student Sustainability Council","Dan Scherson","Daniel J. Tisch","David Bruckman","David Cooperrider","David Crampton","David Matthiesen","David Miller","Design for America","Dorr Dearborn","East Cleveland Partnership","Elaine Borawski","Electrochemical Engineering and Energy Laboratory (EEEL)","Electronics Design Center","Elizabeth Tracy","Engineers without Borders / Humanitarian Design Corps","Environmental Health Watch","Erika M. Olbricht","Evan Meszaros","Food Recovery Network","Frank Ernst","Fred Collopy","Garden@Case","Gerald Matisoff","Global Health Design Collaborative","Global Medical Brigades","Grant Goodrich","Great Lakes Energy Institute (GLEI)","Green City Blue Lake Institute at the Cleveland Museum of Natural History","Green Energy Ohio","Gregory Jonas","Healthy Homes Advisory Council of Greater Cleveland","Holden Forests & Gardens","Howard Maier","Ica Manas-Zloczower","Ina Martin","Inamori International Center for Ethics and Excellence","Institute for Smart Secure and Connected Systems (ISSACS)","James Kazura","James McGuffin-Cawley","Jean H. Burns (Moriuchi)","Jean H. Burns Ecology Lab","Jeremy Bendik-Keymer","Jill Korbin","John Broich","Joseph Koonce","Kalle Lyytinen","Karen Braun","Kenneth Loparo","Kenneth Singer","Kimberly Emmons","Kurt Rhoads","Kurt Stange","Law for Environment,Animals and Food","Lei Zhu","Louis Stokes Cleveland Veterans Administration Medical Center","Marilyn Sanders Mobley","Mario Garcia-Sanz","Mark Chupp","Mark DeGuire","Mark Joseph","Mary Ann Swetland Center for Environmental Health","Materials for Opto/Electronics Research and Education (MORE) Center","Matthew Burkhart","Matthew Hodgetts","Matthew Sobel","Medical Center Company (MCCo)","Megan Buchter","Michael Benard","Narasingarao \"Sree\" Sreenath","Narcisz Fejes","Net Impact","Northeast Ohio Regional Sewer District (NEORSD)","Office of Energy & Sustainability","OH Climate Strike","Ohio Chapter of the U.S. Green Building Council","Partners in Health Engage","Pete Moore","Peter McCall","Peter Shulman","Peter Whitehouse","Peter Whiting","Peter Zimmerman","Prevention Research Center for Healthy Neighborhoods","Regina Nixon","Richard Boland","Rob Fischer","Robin Dubin","Roger French","Ron Blanton","Ron Fry","Sana Loue","Sarah Gridley","Sayan Chatterjee","Sears think[box]","SENCER Center for Innovation","Shannon French","Sharon Milligan","Slow Food","Social Justice Institute","Solar Durability and Lifetime Extension Center (SDLE)","Solar United Neighbors (Ohio Chapter)","Stephanie Corbett","Student Sustainability Council","Sue Flocke","Sunrise CWRU","Sustainability House","Sustainable Cleveland Office","Swagelok Center for Surface Analysis of Materials (SCSAM)","Ted Steinberg","The Architect","The Fowler Center for Business as an Agent of World Benefit","The Ohio Wind Energy Research and Commercialization (Ohio-WERC) Center","The Richard and Opal Vanderhoof  Infrastructure Research and Education Facility","UNICEF CWRU","University Farm","Vincenzo Liberatore","Xiangwu (David) Zeng","Yeager Center for Electrochemical Sciences"],"group":["Person","Campus Organization","Person","Person","Person","Person","National Organization","Person","Person","Person","Person","Campus Organization","Person","Person","Campus Organization","Campus Organization","Campus Organization","Campus Organization","Campus Organization","Campus Organization","Campus Organization","Person","Person","Person","Person","Regional Organization","Regional Organization","Campus Organization","Regional Organization","Regional Organization","Regional Organization","Campus Organization","Campus Organization","Campus Organization","Campus Organization","Person","Person","Person","Person","Person","Person","Person","Campus Organization","Person","Regional Organization","Person","Campus Organization","Campus Organization","Person","Campus Organization","Regional Organization","Person","Person","Campus Organization","Person","Person","Campus Organization","Person","Campus Organization","Campus Organization","Person","Campus Organization","Regional Organization","Regional Organization","Person","Regional Organization","Regional Organization","Person","Person","Person","Campus Organization","Campus Organization","Person","Person","Person","Campus Organization","Person","Person","Person","Person","Person","Person","Person","Person","Person","Person","Person","Campus Organization","Person","Regional Organization","Person","Person","Person","Person","Person","Campus Organization","Campus Organization","Person","Person","Person","Regional Organization","Person","Person","Person","Person","Campus Organization","Regional Organization","Campus Organization","Campus Organization","Regional Organization","Campus Organization","Person","Person","Person","Person","Person","Person","Campus Organization","Person","Person","Person","Person","Person","Person","Person","Person","Person","Person","Campus Organization","Regional Organization","Person","Person","Campus Organization","Campus Organization","Campus Organization","Regional Organization","Person","Campus Organization","Person","Campus Organization","Campus Organization","Regional Organization","Campus Organization","Person","Campus Organization","Campus Organization","Campus Organization","Campus Organization","Campus Organization","Campus Organization","Person","Person","Campus Organization"]},"options":{"NodeID":"label","Group":"type_2","colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":16,"fontFamily":"serif","clickTextSize":40,"linkDistance":50,"linkWidth":"function(d) { return Math.sqrt(d.value); }","charge":-5,"opacity":1,"zoom":true,"legend":true,"arrows":false,"nodesize":false,"radiusCalculation":" Math.sqrt(d.nodesize)+6","bounded":false,"opacityNoHover":0.05,"clickAction":null}},"evals":[],"jsHooks":[]}</script>
+<p class="caption">
+Preliminary Network Diagram
+</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
